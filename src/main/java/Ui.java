@@ -12,10 +12,12 @@ public class Ui {
         printLine();
     }
 
-    public void showAdded(String task) {
+    public void showAdded(String task,  int totalTasks) {
         printLine();
         System.out.println(" added: " + task);
+        System.out.println(" Now you have " + totalTasks + " tasks in the list.");
         printLine();
+
 
     }
 

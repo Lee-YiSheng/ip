@@ -29,14 +29,18 @@ public class Pep {
                 if (index != -1 && taskList.unmarkTask(index)) {
                     ui.showUnmarked(taskList.getTask(index));
                 }
+            } else if (userInput.startsWith("todo ")) {
+                String description = userInput.substring(5);
+                Task task = new Todo(description);
+                taskList.addTask(task);
+                ui.showAdded(String.valueOf(task), taskList.getCount());
             } else if (userInput.startsWith("deadline ")) {
-                int index = parseIndex(userInput);
-                if (index != -1 && taskList.unmarkTask(index)) {
-                    ui.showMarked(taskList.getTask(index));
+                String[] parts = userInput.substring(9).split(" /by ", 2);
+                if (parts.length == 2) {
+                    Task task = new Deadline(parts[0], parts[1]);
+                    taskList.addTask(task);
+                    ui.showAdded(String.valueOf(task), taskList.getCount());
                 }
-            } else {
-                taskList.addTask(new Task(userInput));
-                ui.showAdded(userInput);
             }
             userInput = scanner.nextLine();
         }
