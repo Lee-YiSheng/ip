@@ -41,7 +41,18 @@ public class Pep {
                     taskList.addTask(task);
                     ui.showAdded(String.valueOf(task), taskList.getCount());
                 }
+            } else if (userInput.startsWith("event ")) {
+                String[] parts = userInput.substring(6).split(" /from ", 2);
+                if (parts.length == 2) {
+                    String[] timeParts = parts[1].split(" /to ", 2);
+                    if (timeParts.length == 2) {
+                        Task task = new Event(parts[0], timeParts[0], timeParts[1]);
+                        taskList.addTask(task);
+                        ui.showAdded(String.valueOf(task), taskList.getCount());
+                    }
+                }
             }
+
             userInput = scanner.nextLine();
         }
 
