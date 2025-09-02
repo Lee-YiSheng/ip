@@ -16,6 +16,7 @@ public class Ui {
         printLine();
         System.out.println(" added: " + task);
         printLine();
+
     }
 
     public void showTaskList(TaskList taskList) {
@@ -23,7 +24,7 @@ public class Ui {
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < taskList.getCount(); i++) {
             Task task = taskList.getTask(i);
-            System.out.println(" " + (i + 1) + ".[" + task.getStatusIcon() + "] " + task.getDescription());
+            System.out.println(" " + (i + 1) + task);
         }
         printLine();
     }
@@ -31,14 +32,14 @@ public class Ui {
     public void showMarked(Task task) {
         printLine();
         System.out.println(" task marked as done:");
-        System.out.println("   [" + task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println("   " + task);
         printLine();
     }
 
     public void showUnmarked(Task task) {
         printLine();
         System.out.println(" this task marked as not done:");
-        System.out.println("   [" + task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println("   " + task);
         printLine();
     }
 

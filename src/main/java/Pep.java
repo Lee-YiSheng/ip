@@ -29,6 +29,11 @@ public class Pep {
                 if (index != -1 && taskList.unmarkTask(index)) {
                     ui.showUnmarked(taskList.getTask(index));
                 }
+            } else if (userInput.startsWith("deadline ")) {
+                int index = parseIndex(userInput);
+                if (index != -1 && taskList.unmarkTask(index)) {
+                    ui.showMarked(taskList.getTask(index));
+                }
             } else {
                 taskList.addTask(new Task(userInput));
                 ui.showAdded(userInput);
