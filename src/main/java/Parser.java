@@ -1,3 +1,5 @@
+import commands.*;
+
 public class Parser {
     public static Command parse(String userInput) {
         if (userInput.equals("bye")) {

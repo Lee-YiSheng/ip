@@ -1,15 +1,19 @@
-public class AddDeadlineCommand extends Command {
-    private final String description;
-    private final String by;
+package commands;
 
-    public AddDeadlineCommand(String description, String by) {
+import tasks.TaskList;
+import tasks.Todo;
+import Ui;
+
+public class AddTodoCommand extends Command {
+    private final String description;
+
+    public AddTodoCommand(String description) {
         this.description = description;
-        this.by = by;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        Deadline task = new Deadline(description, by);
+        Task task = new Todo(description);
         tasks.addTask(task);
         ui.showAdded(task.toString(), tasks.getCount());
     }

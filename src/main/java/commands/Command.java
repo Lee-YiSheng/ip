@@ -1,3 +1,8 @@
+package commands;
+
+import tasks.TaskList;
+import Ui;
+
 public abstract class Command {
     /**
      * Executes the command.

@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import commands.Command;
+
 public class Pep {
     private final String chatbotName;
     private final Ui ui;
