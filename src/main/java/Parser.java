@@ -22,6 +22,6 @@ public class Parser {
             String[] timeParts = parts[1].split(" /to ", 2);
             return new AddEventCommand(parts[0], timeParts[0], timeParts[1]);
         }
-        throw new IllegalArgumentException("Unknown command");
+        throw new IllegalArgumentException("What in the world did you just sent?");
     }
 }
