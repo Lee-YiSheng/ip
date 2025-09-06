@@ -1,3 +1,5 @@
+import tasks.Task;
+
 public class Ui {
     private final String line;
 
