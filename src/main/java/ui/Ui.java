@@ -1,4 +1,7 @@
+package ui;
+
 import tasks.Task;
+import tasks.TaskList;
 
 public class Ui {
     private final String line;
@@ -55,5 +58,9 @@ public class Ui {
 
     private void printLine() {
         System.out.println(line);
+    }
+
+    public void showError(String message) {
+        System.err.println(message);
     }
 }

@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import commands.Command;
+import tasks.TaskList;
+import ui.Ui;
 
 public class Pep {
     private final String chatbotName;
@@ -28,14 +30,6 @@ public class Pep {
             }
         }
         scanner.close();
-    }
-
-    private int parseIndex(String input) {
-        try {
-            return Integer.parseInt(input.split(" ")[1]) - 1;
-        } catch (Exception e) {
-            return -1;
-        }
     }
 
     public static void main(String[] args) {

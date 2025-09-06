@@ -2,7 +2,7 @@ package commands;
 
 import tasks.TaskList;
 import tasks.Event;
-import Ui;
+import ui.Ui;
 
 public class AddEventCommand extends Command {
     private final String description;

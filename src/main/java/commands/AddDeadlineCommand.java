@@ -2,7 +2,7 @@ package commands;
 
 import tasks.TaskList;
 import tasks.Deadline;
-import Ui;
+import ui.Ui;
 
 public class AddDeadlineCommand extends Command {
     private final String description;

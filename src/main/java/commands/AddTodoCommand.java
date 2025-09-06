@@ -2,7 +2,7 @@ package commands;
 
 import tasks.TaskList;
 import tasks.Todo;
-import Ui;
+import ui.Ui;
 
 public class AddTodoCommand extends Command {
     private final String description;

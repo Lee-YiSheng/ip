@@ -1,4 +1,4 @@
-import tasks.Task;
+package tasks;
 
 public class TaskList {
     private final Task[] tasks;

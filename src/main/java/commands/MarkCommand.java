@@ -1,7 +1,7 @@
 package commands;
 
 import tasks.TaskList;
-import Ui;
+import ui.Ui;
 
 public class MarkCommand extends Command {
     private final int index;

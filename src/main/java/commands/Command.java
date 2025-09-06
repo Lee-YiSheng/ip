@@ -1,7 +1,7 @@
 package commands;
 
 import tasks.TaskList;
-import Ui;
+import ui.Ui;
 
 public abstract class Command {
     /**

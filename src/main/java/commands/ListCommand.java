@@ -1,7 +1,7 @@
 package commands;
 
 import tasks.TaskList;
-import Ui;
+import ui.Ui;
 
 public class ListCommand extends Command {
     @Override
