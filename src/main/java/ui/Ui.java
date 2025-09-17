@@ -55,6 +55,14 @@ public class Ui {
         System.out.println(" Bye. please dont come back");
         printLine();
     }
+    public void showDeleted(Task task, int remainingCount) {
+        printLine();
+        System.out.println(" hAhahah tASk has been yEETED:");
+        System.out.println("   " + task);
+        System.out.println(" Now you have " + remainingCount + " tasks in the list.");
+        printLine();
+    }
+
 
     private void printLine() {
         System.out.println(line);
