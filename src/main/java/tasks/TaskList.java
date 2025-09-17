@@ -1,42 +1,48 @@
 package tasks;
 
+import java.util.ArrayList;
+
+import exceptions.PepException;
+
 public class TaskList {
-    private final Task[] tasks;
-    private int count;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new Task[100];
-        this.count = 0;
+        this.tasks = new ArrayList<>();
     }
 
     public void addTask(Task task) {
-        if (count < tasks.length) {
-            tasks[count] = task;
-            count++;
-        }
-    }
-
-    public boolean markTask(int index) {
-        if (index >= 0 && index < count) {
-            tasks[index].markAsDone();
-            return true;
-        }
-        return false;
-    }
-
-    public boolean unmarkTask(int index) {
-        if (index >= 0 && index < count) {
-            tasks[index].markAsNotDone();
-            return true;
-        }
-        return false;
+        tasks.add(task);
     }
 
     public Task getTask(int index) {
-        return tasks[index];
+        return tasks.get(index);
     }
 
     public int getCount() {
-        return count;
+        return tasks.size();
     }
+
+    public Task deleteTask(int index) {
+        return tasks.remove(index);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public void markTask(int index) throws PepException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new PepException("Invalid task number. Use 'list' to see valid task numbers.");
+        }
+        tasks.get(index).markAsDone();
+    }
+
+    public void unmarkTask(int index) throws PepException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new PepException("Invalid task number. Use 'list' to see valid task numbers.");
+        }
+        tasks.get(index).markAsNotDone();
+    }
+
 }
