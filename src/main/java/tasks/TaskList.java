@@ -2,8 +2,6 @@ package tasks;
 
 import java.util.ArrayList;
 
-import exceptions.PepException;
-
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -11,31 +9,41 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public Task getTask(int index) {
-        return tasks.get(index);
+    public void addTask(Task task) {
+        if (task != null) {
+            tasks.add(task);
+        }
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+    public boolean markTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.get(index).markAsDone();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean unmarkTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.get(index).markAsNotDone();
+            return true;
+        }
+        return false;
     }
 
     public int getCount() {
         return tasks.size();
     }
 
-    public Task deleteTask(int index) {
-        return tasks.remove(index);
-    }
-
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-
-    public void markTask(int index) throws PepException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new PepException("Invalid task number. Use 'list' to see valid task numbers.");
-        }
-        tasks.get(index).markAsDone();
+    public Task getTask(int i) {
+        return tasks.get(i);
     }
 
     public void unmarkTask(int index) throws PepException {
