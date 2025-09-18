@@ -1,42 +1,48 @@
 package tasks;
 
+import java.util.ArrayList;
+
 public class TaskList {
-    private final Task[] tasks;
-    private int count;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new Task[100];
-        this.count = 0;
+        this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void addTask(Task task) {
-        if (count < tasks.length) {
-            tasks[count] = task;
-            count++;
+        if (task != null) {
+            tasks.add(task);
         }
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
     public boolean markTask(int index) {
-        if (index >= 0 && index < count) {
-            tasks[index].markAsDone();
+        if (index >= 0 && index < tasks.size()) {
+            tasks.get(index).markAsDone();
             return true;
         }
         return false;
     }
 
     public boolean unmarkTask(int index) {
-        if (index >= 0 && index < count) {
-            tasks[index].markAsNotDone();
+        if (index >= 0 && index < tasks.size()) {
+            tasks.get(index).markAsNotDone();
             return true;
         }
         return false;
     }
 
-    public Task getTask(int index) {
-        return tasks[index];
+    public int getCount() {
+        return tasks.size();
     }
 
-    public int getCount() {
-        return count;
+    public Task getTask(int i) {
+        return tasks.get(i);
     }
 }
