@@ -2,6 +2,8 @@ package tasks;
 
 import java.util.ArrayList;
 
+import exceptions.PepException;
+
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -30,14 +32,6 @@ public class TaskList {
         return false;
     }
 
-    public boolean unmarkTask(int index) {
-        if (index >= 0 && index < tasks.size()) {
-            tasks.get(index).markAsNotDone();
-            return true;
-        }
-        return false;
-    }
-
     public int getCount() {
         return tasks.size();
     }
@@ -53,4 +47,11 @@ public class TaskList {
         tasks.get(index).markAsNotDone();
     }
 
+    public Task deleteTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.get(index).markAsNotDone();
+            return tasks.remove(index);
+        }
+        return null;
+    }
 }
