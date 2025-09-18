@@ -63,4 +63,8 @@ public class Ui {
     public void showError(String message) {
         System.err.println(message);
     }
+
+    public void showMessage(String s) {
+        System.out.println(s);
+    }
 }

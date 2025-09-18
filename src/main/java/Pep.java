@@ -18,12 +18,12 @@ public class Pep {
         TaskList loadedTasks;
         try {
             loadedTasks = storage.load();
+            ui.showMessage("Loaded " + loadedTasks.getCount() + " tasks from file.");
         } catch (PepException e) {
             ui.showError(e.getMessage());
-            loadedTasks = new TaskList();
+            loadedTasks = new TaskList(); // start fresh
         }
         this.taskList = loadedTasks;
-
     }
 
     public void run() {
@@ -47,7 +47,7 @@ public class Pep {
 
 
     public static void main(String[] args) {
-        Pep pepBot = new Pep("Pep", "data/pep.txt");
+        Pep pepBot = new Pep("Pep", "./data/pep.txt");
         pepBot.run();
     }
 

@@ -24,18 +24,37 @@ public class Storage {
 
     public TaskList load() throws PepException {
         ArrayList<Task> tasks = new ArrayList<>();
+
         try {
+            System.out.println("[DEBUG] Loading from: " + filePath.toAbsolutePath());
+
+            // If file doesn't exist, create folder + file, return empty list
             if (!Files.exists(filePath)) {
                 createFileAndDirectory();
-                return new TaskList();
+                return new TaskList(tasks);
             }
-            Scanner scanner = new Scanner(filePath.toFile());
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                Task task = parseTask(line);
-                tasks.add(task);
+
+            // Read file line-by-line
+            try (Scanner scanner = new Scanner(filePath.toFile())) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine().trim();
+                    if (line.isEmpty()) {
+                        continue; // skip blank lines
+                    }
+                    try {
+                        Task task = parseTask(line);
+                        if (task != null) {
+                            tasks.add(task);
+                        }
+                    } catch (PepException e) {
+                        // Skip corrupted line but log it
+                        System.err.println("[WARN] Skipping corrupted line: " + line);
+                    }
+                }
             }
-            return new TaskList();
+
+            return new TaskList(tasks);
+
         } catch (IOException e) {
             throw new PepException("Error loading tasks: " + e.getMessage());
         }
