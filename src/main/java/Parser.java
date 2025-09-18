@@ -1,4 +1,12 @@
-import commands.*;
+import commands.AddDeadlineCommand;
+import commands.AddEventCommand;
+import commands.AddTodoCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.ExitCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.UnmarkCommand;
 
 public class Parser {
     public static Command parse(String userInput) {
@@ -21,6 +29,9 @@ public class Parser {
             String[] parts = userInput.substring(6).split(" /from ", 2);
             String[] timeParts = parts[1].split(" /to ", 2);
             return new AddEventCommand(parts[0], timeParts[0], timeParts[1]);
+        } else if (userInput.startsWith("delete ")) {
+            int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+            return new DeleteCommand(index);
         }
         throw new IllegalArgumentException("What in the world did you just sent?");
     }
