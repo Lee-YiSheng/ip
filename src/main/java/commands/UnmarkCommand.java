@@ -2,6 +2,7 @@ package commands;
 
 import tasks.TaskList;
 import ui.Ui;
+import exceptions.PepException;
 
 public class UnmarkCommand extends Command {
     private final int index;
@@ -11,9 +12,8 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        if (tasks.unmarkTask(index)) {
-            ui.showUnmarked(tasks.getTask(index));
-        }
+    public void execute(TaskList tasks, Ui ui) throws PepException {
+        tasks.unmarkTask(index);
+        ui.showUnmarked(tasks.getTask(index));
     }
 }
