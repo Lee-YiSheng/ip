@@ -45,10 +45,8 @@ public class Pep {
         scanner.close();
     }
 
-
     public static void main(String[] args) {
         Pep pepBot = new Pep("Pep", "./data/pep.txt");
         pepBot.run();
     }
-
 }
