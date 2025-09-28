@@ -1,5 +1,6 @@
 package commands;
 
+import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 import exceptions.PepException;
@@ -14,6 +15,7 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) throws PepException {
         tasks.markTask(index);
-        ui.showMarked(tasks.getTask(index));
+        Task task = tasks.getTask(index);
+        ui.showMarked(task);
     }
 }
