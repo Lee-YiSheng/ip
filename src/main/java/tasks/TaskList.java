@@ -5,15 +5,13 @@ import java.util.List;
 
 import exceptions.PepException;
 
-public class TaskList {
-    private final ArrayList<Task> tasks;
-
+/**
+ * Represents the list of tasks managed by the chatbot.
+ * Provides methods to add, delete, mark, unmark, and search tasks.
+ */
+public record TaskList(ArrayList<Task> tasks) {
     public TaskList() {
-        this.tasks = new ArrayList<>();
-    }
-
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        this(new ArrayList<>());
     }
 
     public void addTask(Task task) {
@@ -22,9 +20,6 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
     public void markTask(int index) {
         if (index >= 0 && index < tasks.size()) {
             tasks.get(index).markAsDone();
@@ -46,6 +41,13 @@ public class TaskList {
         tasks.get(index).markAsNotDone();
     }
 
+    /**
+     * Deletes the task at the specified index from the task list.
+     * Marks the task as not done before removal.
+     *
+     * @param index the zero-based index of the task to delete
+     * @return the removed Task, or null if the index is invalid
+     */
     public Task deleteTask(int index) {
         if (index >= 0 && index < tasks.size()) {
             tasks.get(index).markAsNotDone();
@@ -53,7 +55,12 @@ public class TaskList {
         }
         return null;
     }
-
+    /**
+     * Finds all tasks whose description contains the given keyword.
+     *
+     * @param keyword the keyword to search for
+     * @return a list of matching tasks, or an empty list if none found
+     */
     public List<Task> findTasks(String keyword) {
         List<Task> matches = new ArrayList<>();
         for (Task task : tasks) {

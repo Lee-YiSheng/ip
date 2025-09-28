@@ -4,6 +4,10 @@ import java.util.List;
 import tasks.Task;
 import tasks.TaskList;
 
+/**
+ * Handles all user interface interactions, including displaying messages
+ * and task lists to the user.
+ */
 public class Ui {
     private final String line;
 
@@ -11,6 +15,11 @@ public class Ui {
         this.line = "____________________________________________________________";
     }
 
+    /**
+     * Displays the welcome message when the chatbot starts.
+     *
+     * @param chatbotName the name of the chatbot
+     */
     public void showWelcome(String name) {
         printLine();
         System.out.println(" Hi im" + name);
@@ -35,6 +44,11 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Displays the given list of tasks with numbering.
+     *
+     * @param tasks the list of tasks to display
+     */
     public void showTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("____________________________________________________________");
@@ -82,6 +96,11 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Displays an error message to the user.
+     *
+     * @param message the error message to display
+     */
     public void showError(String message) {
         System.err.println(message);
     }

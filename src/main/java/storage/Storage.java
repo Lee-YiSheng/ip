@@ -15,13 +15,29 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles saving and loading of tasks to and from the hard disk.
+ * Uses a relative, OS-independent file path for portability.
+ */
 public class Storage {
     private final Path filePath;
 
+    /**
+     * Creates a Storage object with the specified file path.
+     *
+     * @param filePath the relative path to the storage file
+     */
     public Storage(String filePath) {
         this.filePath = Path.of(filePath);
     }
-
+    /**
+     * Loads tasks from the storage file into a TaskList.
+     * Creates the file and directory if they do not exist.
+     * Skips corrupted lines gracefully.
+     *
+     * @return a TaskList containing all successfully loaded tasks
+     * @throws PepException if an I/O error occurs while reading the file
+     */
     public TaskList load() throws PepException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -60,11 +76,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given TaskList to the storage file.
+     *
+     * @param tasks the TaskList to save
+     * @throws PepException if an I/O error occurs while writing to the file
+     */
     public void save(TaskList tasks) throws PepException {
         try {
             createFileAndDirectory();
             FileWriter fw = new FileWriter(filePath.toFile());
-            for (Task task : tasks.getTasks()) {
+            for (Task task : tasks.tasks()) {
                 fw.write(formatTask(task) + System.lineSeparator());
             }
             fw.close();
