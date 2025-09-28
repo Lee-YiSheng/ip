@@ -1,6 +1,8 @@
 package ui;
 
 import java.util.List;
+
+import exceptions.PepException;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -34,7 +36,7 @@ public class Ui {
         printLine();
     }
 
-    public void showTaskList(TaskList taskList) {
+    public void showTaskList(TaskList taskList) throws PepException {
         printLine();
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < taskList.getCount(); i++) {
@@ -97,12 +99,14 @@ public class Ui {
     }
 
     /**
-     * Displays an error message to the user.
+     * Displays an error message to the user in a consistent boxed format.
      *
      * @param message the error message to display
      */
     public void showError(String message) {
-        System.err.println(message);
+        System.out.println("____________________________________________________________");
+        System.out.println(" " + message);
+        System.out.println("____________________________________________________________");
     }
 
     public void showMessage(String s) {

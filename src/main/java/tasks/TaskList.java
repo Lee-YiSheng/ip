@@ -20,41 +20,72 @@ public record TaskList(ArrayList<Task> tasks) {
         }
     }
 
-    public void markTask(int index) {
-        if (index >= 0 && index < tasks.size()) {
-            tasks.get(index).markAsDone();
-        }
-    }
-
     public int getCount() {
         return tasks.size();
     }
 
-    public Task getTask(int i) {
-        return tasks.get(i);
-    }
-
-    public void unmarkTask(int index) throws PepException {
+    /**
+     * Validates that the given index is within the bounds of the task list.
+     *
+     * @param index the zero-based index to validate
+     * @throws PepException if the index is out of range
+     */
+    public void validateIndex(int index) throws PepException {
         if (index < 0 || index >= tasks.size()) {
-            throw new PepException("Invalid task number. Use 'list' to see valid task numbers.");
+            throw new PepException("Task number " + (index + 1)
+                    + " does not exist. You currently have "
+                    + tasks.size() + " tasks.");
         }
-        tasks.get(index).markAsNotDone();
     }
 
     /**
-     * Deletes the task at the specified index from the task list.
-     * Marks the task as not done before removal.
+     * Returns the task at the given index after validation.
      *
-     * @param index the zero-based index of the task to delete
-     * @return the removed Task, or null if the index is invalid
+     * @param index the zero-based index of the task
+     * @return the Task at the given index
+     * @throws PepException if the index is out of range
      */
-    public Task deleteTask(int index) {
-        if (index >= 0 && index < tasks.size()) {
-            tasks.get(index).markAsNotDone();
-            return tasks.remove(index);
-        }
-        return null;
+    public Task getTask(int index) throws PepException {
+        validateIndex(index);
+        return tasks.get(index);
     }
+
+    /**
+     * Deletes the task at the given index after validation.
+     *
+     * @param index the zero-based index of the task
+     * @return the removed Task
+     * @throws PepException if the index is out of range
+     */
+    public Task deleteTask(int index) throws PepException {
+        validateIndex(index);
+        tasks.get(index).markAsNotDone();
+        return tasks.remove(index);
+    }
+
+    /**
+     * Marks the task at the given index as done.
+     *
+     * @param index the zero-based index of the task
+     * @throws PepException if the index is out of range
+     */
+    public void markTask(int index) throws PepException {
+        validateIndex(index);
+        tasks.get(index).markAsDone();
+    }
+
+    /**
+     * Marks the task at the given index as not done.
+     *
+     * @param index the zero-based index of the task
+     * @throws PepException if the index is out of range
+     */
+    public void unmarkTask(int index) throws PepException {
+        validateIndex(index);
+        tasks.get(index).markAsNotDone();
+    }
+
+
     /**
      * Finds all tasks whose description contains the given keyword.
      *

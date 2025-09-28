@@ -1,5 +1,6 @@
 package commands;
 
+import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 import exceptions.PepException;
@@ -14,6 +15,7 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) throws PepException {
         tasks.unmarkTask(index);
-        ui.showUnmarked(tasks.getTask(index));
+        Task task = tasks.getTask(index);
+        ui.showUnmarked(task);
     }
 }
