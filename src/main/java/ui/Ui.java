@@ -20,9 +20,9 @@ public class Ui {
      *
      * @param chatbotName the name of the chatbot
      */
-    public void showWelcome(String name) {
+    public void showWelcome(String chatbotName) {
         printLine();
-        System.out.println(" Hi im" + name);
+        System.out.println(" Hi im" + chatbotName);
         System.out.println(" What you want");
         printLine();
     }
