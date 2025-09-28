@@ -1,5 +1,3 @@
----
-
 # Pep Chatbot – User Guide
 
 Pep is your friendly task‑tracking chatbot that helps you manage todos, deadlines, and events right from the command line. This guide explains how to use Pep’s features.
@@ -185,5 +183,3 @@ A: In `./data/pep.txt` in the same folder where you run Pep.
 
 **Q: What happens if I edit the save file manually?**  
 A: Pep will try to load it. If a line is corrupted, Pep skips it and continues loading the rest.
-
----
