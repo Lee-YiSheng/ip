@@ -49,14 +49,17 @@ Adds a task with a due date.
 
 **Format:**
 ```
-deadline DESCRIPTION /by DATE
+deadline DESCRIPTION /by yyyy-MM-dd
 ```
 
 **Example:**
 ```
-deadline return book /by June 6th
+deadline return book /by 2019-12-02
 ```
-
+**Displayed as:**
+```
+[D][ ] return book (by: Dec 02 2019)
+```
 ---
 
 ### Adding an event: `event`
@@ -64,12 +67,17 @@ Adds a task with a start and end time.
 
 **Format:**
 ```
-event DESCRIPTION /from START /to END
+event DESCRIPTION /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm
 ```
 
 **Example:**
 ```
-event project meeting /from Mon 2pm /to 4pm
+event project meeting /from 2019-12-02 1400 /to 2019-12-02 1600
+```
+
+**Displayed as:**
+```
+[E][ ] project meeting (from: Dec 02 2019 14:00 to: Dec 02 2019 16:00)
 ```
 
 ---
@@ -158,21 +166,19 @@ bye
   OOPS!!! I'm sorry, but I don't know what that means :-(
   ```
 
----
-
 ## Summary of Commands
 
-| Action     | Format                                      | Example                                   |
-|------------|---------------------------------------------|-------------------------------------------|
-| **List**   | `list`                                      | `list`                                    |
-| **Todo**   | `todo DESCRIPTION`                          | `todo read book`                          |
-| **Deadline** | `deadline DESCRIPTION /by DATE`           | `deadline return book /by June 6th`       |
-| **Event**  | `event DESCRIPTION /from START /to END`     | `event project meeting /from Mon 2pm /to 4pm` |
-| **Mark**   | `mark INDEX`                                | `mark 2`                                  |
-| **Unmark** | `unmark INDEX`                              | `unmark 2`                                |
-| **Delete** | `delete INDEX`                              | `delete 3`                                |
-| **Find**   | `find KEYWORD`                              | `find book`                               |
-| **Exit**   | `bye`                                       | `bye`                                     |
+| Action       | Format                                             | Example                                        |
+|--------------|----------------------------------------------------|------------------------------------------------|
+| **List**     | `list`                                             | `list`                                         |
+| **Todo**     | `todo DESCRIPTION`                                 | `todo read book`                               |
+| **Deadline** | `deadline DESCRIPTION /by yyyy-MM-dd`              | `deadline return book /by 2019-12-02`          |
+| **Event**    | `event DESCRIPTION /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm` | `event project meeting /from 2019-12-02 1400 /to 2019-12-02 1600` |
+| **Mark**     | `mark INDEX`                                       | `mark 2`                                       |
+| **Unmark**   | `unmark INDEX`                                     | `unmark 2`                                     |
+| **Delete**   | `delete INDEX`                                     | `delete 3`                                     |
+| **Find**     | `find KEYWORD`                                     | `find book`                                    |
+| **Exit**     | `bye`                                              | `bye`                                          |
 
 ---
 
