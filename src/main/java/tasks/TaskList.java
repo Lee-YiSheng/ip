@@ -25,12 +25,10 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
-    public boolean markTask(int index) {
+    public void markTask(int index) {
         if (index >= 0 && index < tasks.size()) {
             tasks.get(index).markAsDone();
-            return true;
         }
-        return false;
     }
 
     public int getCount() {
