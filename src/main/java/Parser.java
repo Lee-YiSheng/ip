@@ -4,6 +4,7 @@ import commands.AddTodoCommand;
 import commands.Command;
 import commands.DeleteCommand;
 import commands.ExitCommand;
+import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
 import commands.UnmarkCommand;
@@ -32,6 +33,9 @@ public class Parser {
         } else if (userInput.startsWith("delete ")) {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
             return new DeleteCommand(index);
+        } else if (userInput.startsWith("find ")) {
+            String keyword = userInput.substring(5).trim();
+            return new FindCommand(keyword);
         }
         throw new IllegalArgumentException("What in the world did you just sent?");
     }

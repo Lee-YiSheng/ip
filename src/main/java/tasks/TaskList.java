@@ -1,6 +1,7 @@
 package tasks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import exceptions.PepException;
 
@@ -53,5 +54,15 @@ public class TaskList {
             return tasks.remove(index);
         }
         return null;
+    }
+
+    public List<Task> findTasks(String keyword) {
+        List<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matches.add(task);
+            }
+        }
+        return matches;
     }
 }

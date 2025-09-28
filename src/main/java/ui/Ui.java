@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.List;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -22,8 +23,6 @@ public class Ui {
         System.out.println(" added: " + task);
         System.out.println(" Now you have " + totalTasks + " tasks in the list.");
         printLine();
-
-
     }
 
     public void showTaskList(TaskList taskList) {
@@ -34,6 +33,22 @@ public class Ui {
             System.out.println(" " + (i + 1) + task);
         }
         printLine();
+    }
+
+    public void showTasks(List<Task> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println("____________________________________________________________");
+            System.out.println(" No matching tasks found.");
+            System.out.println("____________________________________________________________");
+            return;
+        }
+
+        System.out.println("____________________________________________________________");
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(" " + (i + 1) + "." + tasks.get(i));
+        }
+        System.out.println("____________________________________________________________");
     }
 
     public void showMarked(Task task) {
@@ -63,7 +78,6 @@ public class Ui {
         printLine();
     }
 
-
     private void printLine() {
         System.out.println(line);
     }
@@ -75,4 +89,5 @@ public class Ui {
     public void showMessage(String s) {
         System.out.println(s);
     }
+
 }

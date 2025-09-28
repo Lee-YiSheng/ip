@@ -9,7 +9,6 @@ public class AddTodoCommand extends Command {
     private final String description;
 
     public AddTodoCommand(String description) {
-
         this.description = description;
     }
 
