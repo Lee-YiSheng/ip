@@ -110,11 +110,7 @@ public class Storage {
     }
 
     private Task parseTask(String line) throws PepException {
-        // Example format: T | 1 | read book
         String[] parts = line.split(" \\| ");
-        if (parts.length < 3) {
-            throw new PepException("Corrupted task data: " + line);
-        }
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
@@ -124,18 +120,22 @@ public class Storage {
             Task todo = new Todo(description);
             if (isDone) todo.markAsDone();
             return todo;
+
         case "D":
-            if (parts.length < 4) throw new PepException("Missing deadline date in: " + line);
-            Task deadline = new Deadline(description, parts[3]);
+            String by = parts[3]; // e.g., 2019-12-02
+            Task deadline = new Deadline(description, by);
             if (isDone) deadline.markAsDone();
             return deadline;
+
         case "E":
-            if (parts.length < 5) throw new PepException("Missing event times in: " + line);
-            Task event = new Event(description, parts[3], parts[4]);
+            String from = parts[3]; // e.g., 2019-12-02T14:00
+            String to = parts[4];   // e.g., 2019-12-02T16:00
+            Task event = new Event(description, from, to);
             if (isDone) event.markAsDone();
             return event;
+
         default:
-            throw new PepException("Unknown task type: " + type);
+            throw new PepException("Corrupted task type: " + type);
         }
     }
 
@@ -144,9 +144,11 @@ public class Storage {
         if (task instanceof Todo) {
             return "T | " + status + " | " + task.getDescription();
         } else if (task instanceof Deadline) {
-            return "D | " + status + " | " + task.getDescription() + " | " + ((Deadline) task).getBy();
+            Deadline d = (Deadline) task;
+            return "D | " + status + " | " + d.getDescription() + " | " + d.getBy();
         } else if (task instanceof Event) {
-            return "E | " + status + " | " + task.getDescription() + " | " + ((Event) task).getFrom() + " | " + ((Event) task).getTo();
+            Event e = (Event) task;
+            return "E | " + status + " | " + e.getDescription() + " | " + e.getFrom() + " | " + e.getTo();
         }
         return "";
     }
