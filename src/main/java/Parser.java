@@ -48,18 +48,18 @@ public class Parser {
         } else if (userInput.startsWith("deadline ")) {
             String[] parts = userInput.substring(9).split(" /by ", 2);
             if (parts.length < 2) {
-                throw new PepException("Usage: deadline <description> /by <date>");
+                throw new PepException("Usage: deadline <description> /by <yyyy-MM-dd>");
             }
             return new AddDeadlineCommand(parts[0].trim(), parts[1].trim());
 
         } else if (userInput.startsWith("event ")) {
             String[] parts = userInput.substring(6).split(" /from ", 2);
             if (parts.length < 2) {
-                throw new PepException("Usage: event <description> /from <start> /to <end>");
+                throw new PepException("Usage: event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>");
             }
             String[] timeParts = parts[1].split(" /to ", 2);
             if (timeParts.length < 2) {
-                throw new PepException("Usage: event <description> /from <start> /to <end>");
+                throw new PepException("Usage: event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>");
             }
             return new AddEventCommand(parts[0].trim(), timeParts[0].trim(), timeParts[1].trim());
 
