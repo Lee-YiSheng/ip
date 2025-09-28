@@ -59,9 +59,7 @@ public class Storage {
                     }
                     try {
                         Task task = parseTask(line);
-                        if (task != null) {
-                            tasks.add(task);
-                        }
+                        tasks.add(task);
                     } catch (PepException e) {
                         // Skip corrupted line but log it
                         System.err.println("[WARN] Skipping corrupted line: " + line);
@@ -99,10 +97,15 @@ public class Storage {
         File file = filePath.toFile();
         File parentDir = file.getParentFile();
         if (parentDir != null && !parentDir.exists()) {
-            parentDir.mkdirs();
+            if (!parentDir.mkdirs()) {
+                System.err.println("[WARN] Failed to create directory: " + parentDir);
+            }
         }
         if (!file.exists()) {
-            file.createNewFile();
+            boolean created = file.createNewFile();
+            if (!created) {
+                System.err.println("[WARN] File already exists but was expected to be new: " + file);
+            }
         }
     }
 
