@@ -15,13 +15,29 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles saving and loading of tasks to and from the hard disk.
+ * Uses a relative, OS-independent file path for portability.
+ */
 public class Storage {
     private final Path filePath;
 
+    /**
+     * Creates a Storage object with the specified file path.
+     *
+     * @param filePath the relative path to the storage file
+     */
     public Storage(String filePath) {
         this.filePath = Path.of(filePath);
     }
-
+    /**
+     * Loads tasks from the storage file into a TaskList.
+     * Creates the file and directory if they do not exist.
+     * Skips corrupted lines gracefully.
+     *
+     * @return a TaskList containing all successfully loaded tasks
+     * @throws PepException if an I/O error occurs while reading the file
+     */
     public TaskList load() throws PepException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -43,9 +59,7 @@ public class Storage {
                     }
                     try {
                         Task task = parseTask(line);
-                        if (task != null) {
-                            tasks.add(task);
-                        }
+                        tasks.add(task);
                     } catch (PepException e) {
                         // Skip corrupted line but log it
                         System.err.println("[WARN] Skipping corrupted line: " + line);
@@ -60,11 +74,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given TaskList to the storage file.
+     *
+     * @param tasks the TaskList to save
+     * @throws PepException if an I/O error occurs while writing to the file
+     */
     public void save(TaskList tasks) throws PepException {
         try {
             createFileAndDirectory();
             FileWriter fw = new FileWriter(filePath.toFile());
-            for (Task task : tasks.getTasks()) {
+            for (Task task : tasks.tasks()) {
                 fw.write(formatTask(task) + System.lineSeparator());
             }
             fw.close();
@@ -77,10 +97,15 @@ public class Storage {
         File file = filePath.toFile();
         File parentDir = file.getParentFile();
         if (parentDir != null && !parentDir.exists()) {
-            parentDir.mkdirs();
+            if (!parentDir.mkdirs()) {
+                System.err.println("[WARN] Failed to create directory: " + parentDir);
+            }
         }
         if (!file.exists()) {
-            file.createNewFile();
+            boolean created = file.createNewFile();
+            if (!created) {
+                System.err.println("[WARN] File already exists but was expected to be new: " + file);
+            }
         }
     }
 

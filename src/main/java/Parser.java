@@ -9,7 +9,19 @@ import commands.ListCommand;
 import commands.MarkCommand;
 import commands.UnmarkCommand;
 
+/**
+ * Parses raw user input strings and returns the corresponding Command object.
+ * Supports commands such as list, mark, unmark, delete, todo, deadline, event, and find.
+ */
 public class Parser {
+
+    /**
+     * Parses the given user input and returns the appropriate Command.
+     *
+     * @param userInput the full line of input entered by the user
+     * @return a Command object representing the user's request
+     * @throws IllegalArgumentException if the input does not match any known command
+     */
     public static Command parse(String userInput) {
         if (userInput.equals("bye")) {
             return new ExitCommand();
